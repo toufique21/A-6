@@ -15,7 +15,7 @@ interface WorkoutContextType {
 
 }
 
-const WorkoutContext = createContext<WorkoutContextType>(undefined);
+const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 
 export const WorkoutProvider = ({ children }) => {
     const [plan, setPlan] = useState<Workout[]>([]);
