@@ -84,3 +84,4 @@ export const WorkoutProvider = ({ children }) => {
 
 
 }
+export { WorkoutContext };

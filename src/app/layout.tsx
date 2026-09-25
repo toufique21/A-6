@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Anton, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { WorkoutProvider } from "@/context/WorkoutContext";
+import Navbar from "./components/Shared/Navbar";
+import Footer from "./components/Shared/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +23,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="en" data-theme = 'light'
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-[#000000]">
         
-        {children}
+        <WorkoutProvider>
+          <Navbar />
+          
+          {children}
+
+          <Footer />
+
+        </WorkoutProvider>
         
       </body>
     </html>
