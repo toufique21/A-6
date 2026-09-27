@@ -1,6 +1,6 @@
 "use client"
 import { Workout } from "@/Types/workout";
-import { Children, createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 
 interface WorkoutContextType {
@@ -17,7 +17,7 @@ interface WorkoutContextType {
 
 const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 
-export const WorkoutProvider = ({ children }) => {
+export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     const [plan, setPlan] = useState<Workout[]>([]);
     const [saved, setSaved] = useState<Workout[]>([]);
 
