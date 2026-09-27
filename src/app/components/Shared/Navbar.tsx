@@ -5,6 +5,12 @@ import logo from '@/app/assets/logo.png'
 import Link from 'next/link';
 import useWorkout from '@/hooks/useWorkout';
 import { usePathname } from 'next/navigation';
+import { Oswald } from 'next/font/google';
+
+const oswald = Oswald({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+});
 
 
 const Navbar = () => {
@@ -23,12 +29,12 @@ const Navbar = () => {
         <div className="navbar bg-base-100 shadow-xs shadow-gray-800 container mx-auto bg-black px-8">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <div tabIndex={0} role="button" className="btn btn-ghost text-white lg:hidden">
                         <svg aria-label="Menu" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                     </div>
                     <ul
                         tabIndex={-1}
-                        className="menu menu-sm dropdown-content bg-base-100 text-white rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-gray-900 text-white rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                 </div>
@@ -36,7 +42,7 @@ const Navbar = () => {
                     <div>
                         <Image src={logo} alt='' width={30} height={10} />
                     </div>
-                    <Link href='/' className="font-anton font-bold text-2xl uppercase leading-[0.85] tracking-tight text-white">FITLOG</Link>
+                    <Link href='/' className={`${oswald.className} py-3 text-4xl font-bold leading-tight text-white text-xl`}>FITLOG</Link>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">

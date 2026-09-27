@@ -1,32 +1,33 @@
+import { Workout } from "@/Types/workout";
+import { Oswald } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { IoMdTime } from "react-icons/io";
+import { PiFireSimpleFill } from "react-icons/pi";
 
-import { Workout } from '@/Types/workout';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import React from 'react';
-import { IoMdTime } from 'react-icons/io';
-import { PiFireSimpleFill } from 'react-icons/pi';
+const oswald = Oswald({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+});
 
 interface WorkoutCardProps {
     workout: Workout;
 }
 
-export const WorkoutCard = ({ workout }: WorkoutCardProps) => {
-
-    if (!workout) {
-        notFound();
-    }
-
+const WorkoutCard = ({ workout }: WorkoutCardProps) => {
     return (
         <Link href={`/workout/${workout.id}`}>
-            <div className="group w-full max-w-sm overflow-hidden rounded-3xl border border-[#222630] bg-[#15171D] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl mt-5">
+            <div className="group mt-5 w-full max-w-sm overflow-hidden rounded-3xl border border-[#222630] bg-[#15171D] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
 
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden">
-                    <Image width={450} height={400}
+                    <Image
                         src={workout.image}
                         alt={workout.name}
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        width={450}
+                        height={400}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
 
                     {/* Difficulty */}
@@ -45,24 +46,29 @@ export const WorkoutCard = ({ workout }: WorkoutCardProps) => {
                 <div className="p-5">
 
                     {/* Title */}
-                    <h2 className="text-xl font-bold tracking-tight text-white">
+                    <h2
+                        className={`${oswald.className} py-3 text-xl font-bold leading-tight text-white`}
+                    >
                         {workout.name}
                     </h2>
 
-                    <div className='flex justify-between'>
+                    {/* Muscle Groups & Equipment */}
+                    <div className="flex flex-col gap-3">
+
                         {/* Muscle Groups */}
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2">
                             {workout.muscleGroups.map((muscle) => (
                                 <span
                                     key={muscle}
-                                    className="flex justify-center items-center rounded-full bg-[#C2F800] px-3 py-1 text-xs font-medium text-black"
+                                    className="flex items-center justify-center rounded-full bg-[#C2F800] px-3 py-1 text-xs font-medium text-black"
                                 >
                                     {muscle}
                                 </span>
                             ))}
                         </div>
+
                         {/* Equipment */}
-                        <div className="mt-4 flex items-center gap-2 text-sm text-gray-400">
+                        <div className="flex items-center gap-2 text-sm text-gray-400">
                             <span className="text-lg">🏋️</span>
                             <span>{workout.equipment}</span>
                         </div>
@@ -70,33 +76,46 @@ export const WorkoutCard = ({ workout }: WorkoutCardProps) => {
 
                     {/* Stats */}
                     <div className="mt-5 grid grid-cols-3 gap-2 rounded-2xl bg-orange-100 p-2">
+
+                        {/* Duration */}
                         <div className="text-center">
-                            <div className='flex justify-center items-center gap-1'>
-                                <div className='text-black'>
-                                    <IoMdTime />
-                                </div>
+                            <div className="flex items-center justify-center gap-1">
+                                <IoMdTime className="text-lg text-black" />
+
                                 <p className="text-lg font-bold text-gray-900">
                                     {workout.duration}
                                 </p>
                             </div>
-                            <p className="text-xs text-gray-500">Minutes</p>
+
+                            <p className="text-xs text-gray-500">
+                                Minutes
+                            </p>
                         </div>
 
+                        {/* Calories */}
                         <div className="border-x border-gray-400 text-center">
-                            <div className='flex justify-center items-center gap-1'>
-                                <div className='text-black'><PiFireSimpleFill /></div>
+                            <div className="flex items-center justify-center gap-1">
+                                <PiFireSimpleFill className="text-lg text-black" />
+
                                 <p className="text-lg font-bold text-gray-900">
                                     {workout.caloriesBurned}
                                 </p>
                             </div>
-                            <p className="text-xs text-gray-500">Calories</p>
+
+                            <p className="text-xs text-gray-500">
+                                Calories
+                            </p>
                         </div>
 
+                        {/* Sets / Reps */}
                         <div className="text-center">
                             <p className="text-lg font-bold text-gray-900">
                                 {workout.sets} × {workout.reps}
                             </p>
-                            <p className="text-xs text-gray-500">Sets / Reps</p>
+
+                            <p className="text-xs text-gray-500">
+                                Sets / Reps
+                            </p>
                         </div>
                     </div>
                 </div>

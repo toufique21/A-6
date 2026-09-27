@@ -1,19 +1,25 @@
 import { getWorkouts } from "@/Library/api";
 import WorkoutCard from "./WorkoutCard";
 import { Workout } from "@/Types/workout";
+import { Oswald } from "next/font/google";
+
+const oswald = Oswald({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+});
 
 export const WorkoutLibrary = async () => {
     const workouts = await getWorkouts();
     return (
-        <section id="library" className="px-6 py-16">
+        <section id="library" className="px-6 py-5">
             <div className="mx-auto max-w-7xl">
 
                 <div className="mb-8">
-                    <h2 className="text-4xl font-bold text-white">
+                    <h2 className={`${oswald.className} py-1 text-3xl font-bold leading-tight text-white`}>
                         THE LIBRARY
                     </h2>
 
-                    <p className="mt-2 text-zinc-400">
+                    <p className=" text-zinc-400">
                         Twelve lifts covering every major muscle group.
                     </p>
                 </div>
@@ -29,6 +35,7 @@ export const WorkoutLibrary = async () => {
 
             </div>
         </section>
+        
     );
 };
 

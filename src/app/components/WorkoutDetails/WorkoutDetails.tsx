@@ -4,6 +4,8 @@ import useWorkout from "@/hooks/useWorkout";
 import { Workout } from "@/Types/workout";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded, MdOutlineDownloadDone } from "react-icons/md";
+import { RiAddBoxFill } from "react-icons/ri";
 
 interface WorkoutDetailsProps {
   workout: Workout;
@@ -41,7 +43,6 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
 
       <div className="grid gap-2 lg:grid-cols-2">
 
-        {/* LEFT - IMAGE */}
         <div className="min-h-[700px]">
           <Image
             width={700}
@@ -52,20 +53,16 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
           />
         </div>
 
-        {/* RIGHT - EVERYTHING */}
         <div className="p-6 md:p-8">
 
-          {/* Name */}
           <h1 className="text-3xl font-bold md:text-4xl">
             {workout.name}
           </h1>
 
-          {/* Description */}
           <p className="mt-4 leading-7 text-gray-400">
             {workout.description}
           </p>
 
-          {/* Muscle Groups */}
           <div className="mt-5">
             <h3 className="mb-3 font-semibold">
               Target Muscles
@@ -83,7 +80,6 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
             </div>
           </div>
 
-          {/* Details */}
           <div className="mt-6 rounded-3xl">
 
             <div className="flex items-center justify-between rounded-t-2xl bg-white/5 p-4">
@@ -139,7 +135,6 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
 
           </div>
 
-          {/* Instructions */}
           <div className="mt-6">
             <h2 className="mb-3 text-xl font-bold">
               Instructions
@@ -161,7 +156,7 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
             </ol>
           </div>
 
-          {/* Buttons */}
+
           <div className="mt-7 flex gap-3">
 
             <button
@@ -169,7 +164,7 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
               disabled={!!alreadyInPlan}
               className="flex-1 rounded-xl bg-[#ccff00] px-5 py-3 font-bold text-black transition hover:bg-[#b7e600] disabled:cursor-not-allowed disabled:bg-gray-700 disabled:text-gray-400"
             >
-              {alreadyInPlan ? "Already Added" : "Add to Plan"}
+              {alreadyInPlan ? <><div className="flex justify-center items-center gap-2"><MdOutlineDownloadDone /> Already Added</div></> : <><div className="flex justify-center items-center gap-2 text-sm"><RiAddBoxFill /> Add To Today,s Plan</div></>}
             </button>
 
             <button
@@ -177,7 +172,7 @@ const WorkoutDetails = ({ workout }: WorkoutDetailsProps) => {
               disabled={!!alreadySaved}
               className="flex-1 rounded-xl border border-[#ccff00] px-5 py-3 font-bold text-[#ccff00] transition hover:bg-[#ccff00] hover:text-black disabled:cursor-not-allowed disabled:border-gray-700 disabled:text-gray-500"
             >
-              {alreadySaved ? "Already Saved" : "Save Workout"}
+              {alreadySaved ? <><div className="flex justify-center items-center gap-2"><MdOutlineDownloadDone /> Already Saved</div></> : <><div className="flex justify-center items-center gap-2"><MdOutlineBookmarkAdded/> Save For Leter</div></> }
             </button>
 
           </div>

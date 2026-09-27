@@ -1,10 +1,16 @@
 "use client";
 
 import useWorkout from "@/hooks/useWorkout";
+import { Oswald } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
+
+const oswald = Oswald({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+});
 
 const MyPlanPage = () => {
     const {
@@ -32,7 +38,6 @@ const MyPlanPage = () => {
         0
     );
 
-    // Sort Today's Plan
     const sortedPlan = [...plan].sort((a, b) => {
         if (sortBy === "duration") {
             return a.duration - b.duration;
@@ -45,7 +50,6 @@ const MyPlanPage = () => {
         return b.rating - a.rating;
     });
 
-    // Sort Saved
     const sortedSaved = [...saved].sort((a, b) => {
         if (sortBy === "duration") {
             return a.duration - b.duration;
@@ -63,9 +67,8 @@ const MyPlanPage = () => {
             <main className="min-h-screen bg-black px-4 py-10 text-white md:px-8 lg:px-12">
                 <div className="mx-auto max-w-6xl">
 
-                    {/* Header */}
                     <div className="mb-10">
-                        <h1 className="text-4xl font-bold md:text-5xl">
+                        <h1 className={`${oswald.className} py-1 text-3xl font-bold leading-tight text-white`}>
                             MY PLAN
                         </h1>
 
@@ -75,44 +78,39 @@ const MyPlanPage = () => {
                         </p>
                     </div>
 
-                    {/* Summary */}
                     <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-                        {/* Exercises */}
                         <div className="rounded-xl border border-gray-800 bg-[#111] p-6">
                             <p className="text-sm text-gray-400">
                                 Exercises
                             </p>
 
-                            <h2 className="mt-2 text-3xl font-bold">
+                            <h2 className={`${oswald.className} py-1 text-3xl font-bold leading-tight text-white`}>
                                 {plan.length}
                             </h2>
                         </div>
 
-                        {/* Minutes */}
                         <div className="rounded-xl border border-gray-800 bg-[#111] p-6">
                             <p className="text-sm text-gray-400">
                                 Minutes
                             </p>
 
-                            <h2 className="mt-2 text-3xl font-bold">
+                            <h2 className={`${oswald.className} py-1 text-3xl font-bold leading-tight text-white`}>
                                 {totalMinutes}
                             </h2>
                         </div>
 
-                        {/* Calories */}
                         <div className="rounded-xl border border-gray-800 bg-[#111] p-6">
                             <p className="text-sm text-gray-400">
                                 Calories
                             </p>
 
-                            <h2 className="mt-2 text-3xl font-bold">
+                            <h2 className={`${oswald.className} py-1 text-3xl font-bold leading-tight text-white`}>
                                 {totalCalories}
                             </h2>
                         </div>
                     </div>
 
-                    {/* Tabs */}
                     <div className="mb-8 flex gap-8 border-b border-gray-800">
 
                         <button
@@ -138,7 +136,6 @@ const MyPlanPage = () => {
                         </button>
                     </div>
 
-                    {/* Sorting Dropdown */}
                     <div className="mb-6 flex justify-end">
                         <select
                             value={sortBy}
@@ -166,23 +163,22 @@ const MyPlanPage = () => {
                         </select>
                     </div>
 
-                    {/* Today's Plan */}
                     {activeTab === "plan" ? (
                         plan.length === 0 ? (
                             <div className="rounded-xl border border-dashed border-gray-700 py-16 text-center">
-                                <h2 className="text-2xl font-semibold">
-                                    Your plan is empty
+                                <h2 className={`${oswald.className} py-1 text-3xl uppercase font-bold leading-tight text-white`}>
+                                    Nothing here yet
                                 </h2>
 
-                                <p className="mt-2 text-gray-400">
-                                    Add some workouts to start your plan.
+                                <p className="mt-2 text-gray-400 text-sm">
+                                    Browse the library and add a lift to get today,s moving.
                                 </p>
 
                                 <Link
                                     href="/"
-                                    className="mt-6 inline-block rounded-lg bg-[#ccff00] px-6 py-3 font-semibold text-black"
+                                    className="mt-6 inline-block rounded-full bg-[#ccff00] px-6 py-3 font-semibold text-sm text-black"
                                 >
-                                    Browse Workouts
+                                    Go to workouts
                                 </Link>
                             </div>
                         ) : (
@@ -266,7 +262,6 @@ const MyPlanPage = () => {
                         )
                     ) : (
 
-                        /* Saved */
                         saved.length === 0 ? (
                             <div className="rounded-xl border border-dashed border-gray-700 py-16 text-center">
                                 <h2 className="text-2xl font-semibold">
