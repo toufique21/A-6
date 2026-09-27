@@ -9,7 +9,7 @@ export const WorkoutLibrary = async () => {
             <div className="mx-auto max-w-7xl">
 
                 <div className="mb-8">
-                    <h2 className="text-4xl font-bold">
+                    <h2 className="text-4xl font-bold text-white">
                         THE LIBRARY
                     </h2>
 
